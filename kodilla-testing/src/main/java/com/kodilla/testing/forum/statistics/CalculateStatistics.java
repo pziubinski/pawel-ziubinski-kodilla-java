@@ -12,10 +12,33 @@ public class CalculateStatistics {
         this.statistics = statistics;
     }
 
+    public void setPostPerUser(double postPerUser) {
+        this.postPerUser = postPerUser;
+    }
+
+    public void setCommentsPerUser(double commentsPerUser) {
+        this.commentsPerUser = commentsPerUser;
+    }
+
+    public void setCommentsPerPost(double commentsPerPost) {
+        this.commentsPerPost = commentsPerPost;
+    }
+
+    public double getPostPerUser() {
+        return postPerUser;
+    }
+
+    public double getCommentsPerUser() {
+        return commentsPerUser;
+    }
+
+    public double getCommentsPerPost() {
+        return commentsPerPost;
+    }
+
     public void calculateAdvStatistics(Statistics statistics) {
-
         try {
-            postPerUser = statistics.postsCount()/statistics.usersNames().size();
+            setPostPerUser((double)statistics.postsCount()/(double)statistics.usersNames().size());
             if (statistics.usersNames().size() == 0)
                 throw new ArithmeticException();
 
@@ -24,7 +47,7 @@ public class CalculateStatistics {
         }
 
         try {
-            commentsPerUser = statistics.commentsCount()/statistics.usersNames().size();
+            setCommentsPerUser((double)statistics.commentsCount()/(double)statistics.usersNames().size());
             if (statistics.usersNames().size() == 0)
                 throw new ArithmeticException();
 
@@ -33,7 +56,7 @@ public class CalculateStatistics {
         }
 
         try {
-            commentsPerPost = statistics.commentsCount()/statistics.postsCount();
+            setCommentsPerPost((double)statistics.commentsCount()/(double)statistics.postsCount());
             if (statistics.postsCount() == 0)
                 throw new ArithmeticException();
 
@@ -47,8 +70,8 @@ public class CalculateStatistics {
         System.out.println("User's counter: " + statistics.usersNames().size());
         System.out.println("Post's counter: " + statistics.postsCount());
         System.out.println("Comment's counter: " + statistics.commentsCount());
-        System.out.println("Average posts per user: " + postPerUser);
-        System.out.println("Average comments per user: " + commentsPerUser);
-        System.out.println("Average comments per post: " + commentsPerPost);
+        System.out.println("Average posts per user: " + getPostPerUser());
+        System.out.println("Average comments per user: " + getCommentsPerUser());
+        System.out.println("Average comments per post: " + getCommentsPerPost());
     }
 }
