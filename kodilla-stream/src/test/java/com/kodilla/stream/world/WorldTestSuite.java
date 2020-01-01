@@ -16,22 +16,25 @@ public class WorldTestSuite {
     @Test
     public void testGetPeopleQuantity() {
         //Given
-        Country poland = new Country("Poland", new BigDecimal("38000000"));
-        Country germany = new Country("Germany", new BigDecimal("78000000"));
-        Country spain = new Country("Spain", new BigDecimal("50000000"));
         Continent europe = new Continent("Europe");
-        europe.addCountry(poland);
-        europe.addCountry(germany);
-        europe.addCountry(spain);
+        europe.addCountry(new Country("Poland", new BigDecimal("38000000")));
+        europe.addCountry(new Country("Germany", new BigDecimal("78000000")));
+        europe.addCountry(new Country("Spain", new BigDecimal("50000000")));
+
+        Continent asia = new Continent("Asia");
+        asia.addCountry(new Country("China", new BigDecimal("1300000000")));
+        asia.addCountry(new Country("India", new BigDecimal("1100000000")));
+        asia.addCountry(new Country("Indonesia", new BigDecimal("230000000")));
 
         //When
         BigDecimal totalInEurope = BigDecimal.ZERO;
         World w = new World();
         w.addContinent(europe);
+        w.addContinent(asia);
         totalInEurope = w.getPeopleQuantity();
 
         //Then
-        BigDecimal expectedInEurope = new BigDecimal("166000000");
+        BigDecimal expectedInEurope = new BigDecimal("2796000000");
         Assert.assertEquals(expectedInEurope, totalInEurope);
     }
 
