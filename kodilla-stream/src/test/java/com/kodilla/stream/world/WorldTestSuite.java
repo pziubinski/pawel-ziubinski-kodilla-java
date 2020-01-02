@@ -27,11 +27,10 @@ public class WorldTestSuite {
         asia.addCountry(new Country("Indonesia", new BigDecimal("230000000")));
 
         //When
-        BigDecimal totalInEurope = BigDecimal.ZERO;
         World w = new World();
         w.addContinent(europe);
         w.addContinent(asia);
-        totalInEurope = w.getPeopleQuantity();
+        BigDecimal totalInEurope = w.getPeopleQuantity();
 
         //Then
         BigDecimal expectedInEurope = new BigDecimal("2796000000");
