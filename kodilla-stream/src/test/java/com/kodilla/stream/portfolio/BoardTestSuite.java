@@ -151,10 +151,10 @@ public class BoardTestSuite {
         double averageTaskExecution = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(t -> t.getTasks().stream())
-                .mapToInt(x -> (Period.between(x.getCreated(), LocalDate.now()).getDays()) + Period.between(LocalDate.now(), x.getDeadline()).getDays() )
+                .mapToInt(x -> (Period.between(x.getCreated(), LocalDate.now()).getDays()) )
                 .average().getAsDouble();
 
         //Then
-        Assert.assertEquals(18.33, averageTaskExecution, 0.1);
+        Assert.assertEquals(10, averageTaskExecution, 0.1);
     }
 }
