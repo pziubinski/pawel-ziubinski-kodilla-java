@@ -6,6 +6,7 @@ public class ExceptionHandling extends Exception {
 
         SecondChallenge secondChallenge = new SecondChallenge();
 
+
         try {
 
             String str = secondChallenge.probablyIWillThrowException(1.5, 1.5);
