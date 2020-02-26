@@ -1,12 +1,14 @@
 package com.kodilla.good.patterns.food2Door;
 
-public class ProductOrder {
+public final class ExtraFoodShopProduct {
     private String productName;
     private Integer quantity;
+    private double price;
 
-    public ProductOrder(final String productName, final Integer quantity) {
+    public ExtraFoodShopProduct(final String productName, final Integer quantity, final double price) {
         this.productName = productName;
         this.quantity = quantity;
+        this.price = price;
     }
 
     public String getProductName() {
@@ -15,5 +17,9 @@ public class ProductOrder {
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }
