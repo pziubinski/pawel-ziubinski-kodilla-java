@@ -1,6 +1,7 @@
 package com.kodilla.good.patterns.food2Door;
 
 public final class ExtraFoodShopProduct {
+
     private String productName;
     private Integer quantity;
     private double price;
@@ -22,4 +23,5 @@ public final class ExtraFoodShopProduct {
     public double getPrice() {
         return price;
     }
+
 }

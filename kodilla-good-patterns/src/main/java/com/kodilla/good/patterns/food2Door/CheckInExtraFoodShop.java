@@ -47,4 +47,5 @@ public class CheckInExtraFoodShop implements CheckInStockService {
         }
         return 0;
     }
+    
 }
