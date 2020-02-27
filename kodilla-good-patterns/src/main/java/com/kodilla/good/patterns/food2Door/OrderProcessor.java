@@ -19,10 +19,7 @@ public class OrderProcessor {
         for (ProductOrder product : listOfProducts) {
             String productToFind = product.getProductName();
 
-            Iterator<CheckInStockService> stockService = checkInStockService.iterator();
-            while (stockService.hasNext()) {
-                CheckInStockService stock = stockService.next();
-
+            for (CheckInStockService stock : checkInStockService) {
                 if(stock.isItemAvaiable(productToFind)) {
                     informationService.messageToCustomer(productToFind, stock.getClass().getSimpleName(), stock.quantityOfProducts(productToFind), stock.priceOfProduct(productToFind) );
                 }

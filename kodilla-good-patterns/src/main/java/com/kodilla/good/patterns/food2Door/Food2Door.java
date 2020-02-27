@@ -15,8 +15,6 @@ public class Food2Door {
         listOfShops.add(new CheckInExtraFoodShop());
         listOfShops.add(new CheckInHealthyShop());
 
-        CheckInHealthyShop hs = new CheckInHealthyShop();
-
         OrderProcessor orderProcessor = new OrderProcessor(listOfShops, new InformationMailService());
         orderProcessor.process(orderRequest);
 
