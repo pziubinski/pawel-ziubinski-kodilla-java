@@ -1,81 +1,63 @@
 package com.kodilla.good.patterns.flightScanner;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WebSearchingService implements SearchingService {
 
     @Override
-    public void allFlightsFrom(String from, TimeTable timeTable) {
+    public void allFlightsFrom(String from) {
 
         System.out.println("Flights from: " + from);
 
-        for (Flight flight : timeTable.timeTable) {
-            if(flight.from.equals(from)) {
-                flight.printFlight();
-            }
-        }
+        TimeTable.getTimeTable().stream()
+                .filter(f -> f.getFrom().equals(from))
+                .map(f -> f.getFrom() + " " + f.getTo() + " " + f.getDepartureDate())
+                .forEach(System.out::println);
     }
 
     @Override
-    public void allFlightsTo(String to, TimeTable timeTable) {
+    public void allFlightsTo(String to) {
 
         System.out.println("Flights to: " + to);
 
-        for (Flight flight : timeTable.timeTable) {
-            if(flight.to.equals(to)) {
-                flight.printFlight();
-            }
-        }
+        TimeTable.getTimeTable().stream()
+                .filter(f -> f.getTo().equals(to))
+                .map(f -> f.getFrom() + " " + f.getTo() + " " + f.getDepartureDate())
+                .forEach(System.out::println);
     }
 
     @Override
-    public void directSearch(String from, String to, TimeTable timeTable) {
+    public void directSearch(String from, String to) {
 
         System.out.println("Flights from: " + from + " and directly to: " + to);
 
-        for (Flight flight : timeTable.timeTable) {
-            if(flight.from.equals(from) && flight.to.equals(to)) {
-                flight.printFlight();
-            }
-        }
+        TimeTable.getTimeTable().stream()
+                .filter(f -> f.getFrom().equals(from) && f.getTo().equals(to))
+                .map(f -> f.getFrom() + " " + f.getTo() + " " + f.getDepartureDate())
+                .forEach(System.out::println);
     }
 
     @Override
-    public void oneTransferFlight(String from, String to, TimeTable timeTable) {
+    public void oneTransferFlight(String from, String to) {
 
-        System.out.println("Flights from: " + from);
-        List<Flight> airportsFrom = new ArrayList<>();
+        List<Flight> airportsFrom = TimeTable.getTimeTable().stream()
+                .filter(f -> f.getFrom().equals(from))
+                .map(f -> new Flight(f.getFrom(), f.getTo(), f.getDepartureDate()))
+                .collect(Collectors.toList());
 
-        for (Flight flight : timeTable.timeTable) {
-            if(flight.from.equals(from)) {
-                airportsFrom.add(new Flight(flight.getFrom(), flight.getTo(), flight.getDepartureDate()));
-                flight.printFlight();
-            }
-        }
-
-        System.out.println("Flights to: " + to);
-        List<Flight> airportsTo = new ArrayList<>();
-
-        for (Flight flight : timeTable.timeTable) {
-            if(flight.to.equals(to)) {
-                airportsTo.add(new Flight(flight.getFrom(), flight.getTo(), flight.getDepartureDate()));
-                flight.printFlight();
-            }
-        }
+        List<Flight> airportsTo = TimeTable.getTimeTable().stream()
+                .filter(f -> f.getTo().equals(to))
+                .map(f -> new Flight(f.getFrom(), f.getTo(), f.getDepartureDate()))
+                .collect(Collectors.toList());
 
         System.out.println("Hub connection");
+        List<Flight> airportHub = airportsFrom.stream()
+                .filter(airportsTo::contains)
+                .collect(Collectors.toList());
 
-        for(Flight flightFrom : airportsFrom) {
-            for(Flight flightTo : airportsTo) {
-
-                if(flightFrom.getTo().equals(flightTo.getFrom()) && flightFrom.getDepartureDate().isBefore(flightTo.getDepartureDate())) {
-                    System.out.println("Your first connecting flight: ");
-                    flightFrom.printFlight();
-                    System.out.println("Your second connecting flight: ");
-                    flightTo.printFlight();
-                }
-            }
-        }
+        airportHub.stream()
+                .map(f -> f.getFrom() + " " + f.getTo() + " " + f.getDepartureDate())
+                .forEach(System.out::println);
     }
 }

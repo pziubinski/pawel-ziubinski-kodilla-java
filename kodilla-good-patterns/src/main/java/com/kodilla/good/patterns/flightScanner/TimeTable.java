@@ -3,28 +3,21 @@ package com.kodilla.good.patterns.flightScanner;
 import java.time.LocalDate;
 import java.util.*;
 
-public class TimeTable {
+public final class TimeTable {
 
-    List<Flight> timeTable = new ArrayList<>();
-    AirportList airportList = new AirportList();
+    public static List<Flight> getTimeTable() {
+        final List<Flight> list = new ArrayList<>();
+        list.add(new Flight("WRO", "WAW", LocalDate.of(2020, 1,1)));
+        list.add(new Flight("WAW", "LUZ", LocalDate.of(2020, 2,2)));
+        list.add(new Flight("WRO", "LUZ", LocalDate.of(2020, 1,3)));
+        list.add(new Flight("WAW", "WRO", LocalDate.of(2020, 2,4)));
+        list.add(new Flight("WRO", "POZ", LocalDate.of(2020, 3,5)));
+        list.add(new Flight("POZ", "WAW", LocalDate.of(2020, 2,6)));
+        list.add(new Flight("POZ", "WAW", LocalDate.of(2020, 3,7)));
+        list.add(new Flight("POZ", "GDN", LocalDate.of(2020, 4,8)));
+        list.add(new Flight("GDN", "WRO", LocalDate.of(2020, 3,9)));
+        list.add(new Flight("GDN", "KRK", LocalDate.of(2020, 4,10)));
 
-    public TimeTable() {
-        final String[] temp = {"RZE"};
-        final int[] month = {1, 10};
-        final int[] day = {10, 15};
-
-        airportList.cityList.forEach((k,v)-> {
-            timeTable.add(new Flight(k, temp[0], LocalDate.of(2020, month[0], day[0])));
-            temp[0] = k;
-            month[0]++;
-            day[0]++;
-        });
-
-        airportList.cityList.forEach((k,v)-> {
-            timeTable.add(new Flight(k, temp[0], LocalDate.of(2020, month[1], day[1])));
-            temp[0] = k;
-            month[1]--;
-            day[1]++;
-        });
+        return new ArrayList<Flight>(list);
     }
 }
