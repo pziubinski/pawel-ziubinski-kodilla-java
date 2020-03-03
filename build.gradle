@@ -1,4 +1,3 @@
-
 plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
@@ -18,48 +17,9 @@ dependencies {
     testCompile('junit:junit:4.12')
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-
     }
 }
 
 test {
     useJUnitPlatform()
 }
-
-
-/*
-
-buildscript {
-    ext {
-        springBootVersion = '2.2.2.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-
-version = '0.0.1'
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    //External Dependencies
-    compile('org.springframework.boot:spring-boot-starter-web')
-
-    //Test Dependencies
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('junit:junit:4.12')
-}
-
-
- */
