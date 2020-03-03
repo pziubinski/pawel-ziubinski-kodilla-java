@@ -13,8 +13,10 @@ public class Food2Door {
 
         List<CheckInStockService> listOfShops = new ArrayList<>();
         listOfShops.add(new CheckInExtraFoodShop());
+        listOfShops.add(new CheckInHealthyShop());
 
-        OrderProcessor orderProcessor = new OrderProcessor(listOfShops);
+        OrderProcessor orderProcessor = new OrderProcessor(listOfShops, new InformationMailService());
         orderProcessor.process(orderRequest);
+
     }
 }

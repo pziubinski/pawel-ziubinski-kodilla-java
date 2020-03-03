@@ -6,9 +6,11 @@ import java.util.List;
 public class OrderProcessor {
 
     private List<CheckInStockService> checkInStockService;
+    private InformationService informationService;
 
-    public OrderProcessor(List<CheckInStockService> checkInStockService) {
+    public OrderProcessor(List<CheckInStockService> checkInStockService, InformationService informationService) {
         this.checkInStockService = checkInStockService;
+        this.informationService = informationService;
     }
 
     public void process(OrderRequest orderRequest) {
@@ -17,14 +19,12 @@ public class OrderProcessor {
         for (ProductOrder product : listOfProducts) {
             String productToFind = product.getProductName();
 
-            Iterator<CheckInStockService> stockService = checkInStockService.iterator();
-            while (stockService.hasNext()) {
-                CheckInStockService stock = stockService.next();
-
+            for (CheckInStockService stock : checkInStockService) {
                 if(stock.isItemAvaiable(productToFind)) {
-                    System.out.println("Product name: " + productToFind + ", shop: " + stock.getClass().getSimpleName() +", quantity: " + stock.quantityOfProducts(productToFind) + ", price: "  + stock.priceOfProduct(productToFind) );
+                    informationService.messageToCustomer(productToFind, stock.getClass().getSimpleName(), stock.quantityOfProducts(productToFind), stock.priceOfProduct(productToFind) );
                 }
             }
         }
     }
+
 }

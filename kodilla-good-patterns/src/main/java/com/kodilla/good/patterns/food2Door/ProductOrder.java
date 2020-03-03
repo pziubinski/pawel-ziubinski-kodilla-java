@@ -1,6 +1,7 @@
 package com.kodilla.good.patterns.food2Door;
 
 public class ProductOrder {
+
     private String productName;
     private Integer quantity;
 
@@ -16,4 +17,5 @@ public class ProductOrder {
     public Integer getQuantity() {
         return quantity;
     }
+
 }
