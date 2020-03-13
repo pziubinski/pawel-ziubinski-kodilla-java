@@ -5,10 +5,10 @@ import org.junit.Test;
 
 public class BigMacTestSuite {
     @Test
-    public void testBigmacNew() {
+    public void testBigMacNew() {
         //Given
         BigMac bigmac = new BigMac.BigmacBuilder()
-                .bun("")
+                .bun("withSesame")
                 .burgers(2)
                 .sauce(SauceSelection.BARBECUE)
                 .ingredients(IngredientsSelection.CHEESE)
