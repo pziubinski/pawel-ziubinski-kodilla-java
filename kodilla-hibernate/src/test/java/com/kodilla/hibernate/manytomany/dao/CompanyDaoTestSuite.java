@@ -9,11 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CompanyDaoTestSuite {
     @Autowired
     CompanyDao companyDao;
+
+    @Autowired
+    EmployeeDao employeeDao;
 
     @Test
     public void testSaveManyToMany(){
@@ -46,18 +51,37 @@ public class CompanyDaoTestSuite {
         companyDao.save(greyMatter);
         int greyMatterId = greyMatter.getId();
 
+        employeeDao.save(johnSmith);
+        int johnId = johnSmith.getId();
+        employeeDao.save(stephanieClarckson);
+        int stephanieId = stephanieClarckson.getId();
+        employeeDao.save(lindaKovalsky);
+        int lindaId = lindaKovalsky.getId();
+
+        List<Employee> employeeLastName = employeeDao.retrieveLastName("Smith");
+        System.out.println("##########");
+        System.out.println(employeeLastName);
+
+        List<Company> equalsThreeLetters = companyDao.retrieveEqualsThreeLetters("Software");
+        System.out.println("##########");
+        System.out.println(equalsThreeLetters);
+        System.out.println("##########");
+
         //Then
         Assert.assertNotEquals(0, softwareMachineId);
         Assert.assertNotEquals(0, dataMaestersId);
         Assert.assertNotEquals(0, greyMatterId);
 
         //CleanUp
-        //try {
-        //    companyDao.deleteById(softwareMachineId);
-        //    companyDao.deleteById(dataMaestersId);
-        //    companyDao.deleteById(greyMatterId);
-        //} catch (Exception e) {
-        //    //do nothing
-        //}
+        try {
+            companyDao.deleteById(softwareMachineId);
+            companyDao.deleteById(dataMaestersId);
+            companyDao.deleteById(greyMatterId);
+            employeeDao.deleteById(johnId);
+            employeeDao.deleteById(stephanieId);
+            employeeDao.deleteById(lindaId);
+        } catch (Exception e) {
+            //do nothing
+        }
     }
 }
