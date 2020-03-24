@@ -70,4 +70,13 @@ public class Employee {
     private void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
+    }
 }

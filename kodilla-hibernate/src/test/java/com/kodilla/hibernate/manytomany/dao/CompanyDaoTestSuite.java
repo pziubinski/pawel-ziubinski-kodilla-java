@@ -61,8 +61,7 @@ public class CompanyDaoTestSuite {
         List<Employee> employeeLastName = employeeDao.retrieveLastName("Smith");
         System.out.println("##########");
         System.out.println(employeeLastName);
-
-        List<Company> equalsThreeLetters = companyDao.retrieveEqualsThreeLetters("Software");
+        List<Company> equalsThreeLetters = companyDao.retrieveEqualsThreeLetters("Sof");
         System.out.println("##########");
         System.out.println(equalsThreeLetters);
         System.out.println("##########");
@@ -71,6 +70,8 @@ public class CompanyDaoTestSuite {
         Assert.assertNotEquals(0, softwareMachineId);
         Assert.assertNotEquals(0, dataMaestersId);
         Assert.assertNotEquals(0, greyMatterId);
+        Assert.assertNotEquals(0, employeeLastName);
+        Assert.assertNotEquals(0, equalsThreeLetters);
 
         //CleanUp
         try {
