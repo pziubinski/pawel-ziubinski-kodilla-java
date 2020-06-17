@@ -12,8 +12,15 @@ import java.math.BigDecimal;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ShopServiceTestSuite {
+
     @Autowired
     private ShopService shopService;
+
+    @Test
+    public void test() {
+        System.out.println("Test ok.");
+
+    }
 
     @Test
     public void testShopServiceSubmitOrder() {
