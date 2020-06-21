@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +29,39 @@ public class FacadeTestSuite {
 
     @Autowired
     private EmployeeDao employeeDao;
+
+
+
+    @Test
+    public void findByPartOfNameFacadeWithMock() throws SearchingProcessingException {
+        //Given
+        List<Employee> employeeMockList = new ArrayList<>();
+        employeeMockList.add(new Employee("John", "Smithson"));
+        employeeMockList.add(new Employee("Stephanie", "Clarckson"));
+
+        employeeDao = mock(EmployeeDao.class);
+        when(employeeDao.retrievePartOfLastName("son")).thenReturn(employeeMockList);
+
+        List<Company> companyMockList = new ArrayList<>();
+        companyMockList.add(new Company("Data Maesters"));
+        companyMockList.add(new Company("Grey Matter"));
+        companyDao = mock(CompanyDao.class);
+        when(companyDao.retrievePartOfLastName("ter")).thenReturn(companyMockList);
+
+        //When
+        List<Employee> employeeList = searchingFacade.searchingEmployee("son");
+        System.out.println("##########");
+        System.out.println(employeeList);
+
+        List<Company> companyList = searchingFacade.searchingCompany("ter");
+        System.out.println("##########");
+        System.out.println(companyList);
+        System.out.println("##########");
+
+        //Then
+        Assert.assertEquals(2, employeeList.size());
+        Assert.assertEquals(2, companyList.size());
+    }
 
     @Test
     public void findByPartOfNameFacade() throws SearchingProcessingException {
