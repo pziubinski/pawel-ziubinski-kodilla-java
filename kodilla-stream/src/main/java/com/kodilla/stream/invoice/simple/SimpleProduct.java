@@ -26,5 +26,4 @@ public final class SimpleProduct {
 
         return productName != null ? productName.equals(that.productName) : that.productName == null;
     }
-
 }
